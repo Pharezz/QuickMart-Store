@@ -9,10 +9,19 @@ export default function ProductsPage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("/api/products")
-      .then((res) => res.json())
-      .then(setProducts)
-      .catch((err) => console.error("Failed to fetch products:", err));
+    const fetchProducts = async () => {
+      try {
+        const baseUrl =
+          process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+        const res = await fetch(`${baseUrl}/api/products`);
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        console.error("Failed to fetch products:", err);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   return (
@@ -51,7 +60,7 @@ export default function ProductsPage() {
               href="/checkout"
               className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg shadow-md transition-colors duration-300 text-center"
             >
-              Go to Checkout  →
+              Go to Checkout →
             </Link>
           </div>
         </>

@@ -12,11 +12,14 @@ export default function AdminDashboard() {
   const [editing, setEditing] = useState(null);
   const [editingImage, setEditingImage] = useState(null);
 
+
   useEffect(() => {
-    fetch("/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("API response", data);
+    const fetchProducts = async () => {
+      try {
+        const baseUrl =
+          process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+        const res = await fetch(`${baseUrl}/api/products`);
+        const data = await res.json();
 
         if (Array.isArray(data)) {
           setProducts(data);
@@ -26,7 +29,12 @@ export default function AdminDashboard() {
           console.error("Unexpected API response", data);
           setProducts([]);
         }
-      });
+      } catch (err) {
+        console.error("❌ Failed to fetch products:", err);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   async function uploadImage(file) {
@@ -34,7 +42,9 @@ export default function AdminDashboard() {
     data.append("file", file);
 
     setUploading(true);
-    const res = await fetch("/api/upload", {
+    const baseUrl =
+      process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+    const res = await fetch(`${baseUrl}/api/upload`, {
       method: "POST",
       body: data,
     });
@@ -47,7 +57,6 @@ export default function AdminDashboard() {
     }
     return uploaded.secure_url;
   }
-
   async function addProduct(e) {
     e.preventDefault();
 

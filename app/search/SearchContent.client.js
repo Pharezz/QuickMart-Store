@@ -14,11 +14,17 @@ export default function SearchContent() {
   const [error, setError] = useState("");
   const { addToCart } = useCart();
 
+  // ✅ baseUrl logic
+  const baseUrl =
+    process.env.NEXT_PUBLIC_VERCEL_URL
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+      : "http://localhost:3000";
+
   useEffect(() => {
     if (query) {
       setLoading(true);
       setError("");
-      fetch(`/api/products?q=${encodeURIComponent(query)}`)
+      fetch(`${baseUrl}/api/products?q=${encodeURIComponent(query)}`)
         .then(async (res) => {
           if (!res.ok) {
             throw new Error("Failed to fetch products");
@@ -38,7 +44,7 @@ export default function SearchContent() {
           setLoading(false);
         });
     }
-  }, [query]);
+  }, [query, baseUrl]);
 
   return (
     <div className="container px-4 sm:px-6 lg:px-8 py-8 mx-auto">

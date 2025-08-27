@@ -2,11 +2,15 @@ import AddToCartButton from "@/components/AddToCartButton";
 import Link from "next/link";
 import { headers } from "next/headers";
 
-async function getProduct(id) {
-  const host = headers().get("host");
-  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
 
-  const res = await fetch(`${protocol}://${host}/api/products/${id}`, {
+async function getProduct(id) {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.NODE_ENV === "production"
+      ? "https://" + process.env.VERCEL_URL
+      : "http://localhost:3000");
+
+  const res = await fetch(`${baseUrl}/api/products/${id}`, {
     cache: "no-store",
   });
 
@@ -16,7 +20,6 @@ async function getProduct(id) {
 
   return res.json();
 }
-
 export default async function ProductPage({ params }) {
   let product;
   try {

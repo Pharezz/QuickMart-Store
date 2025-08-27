@@ -7,10 +7,16 @@ export default function OrdersPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // ✅ same baseUrl logic as app/page.js
+  const baseUrl =
+    process.env.NEXT_PUBLIC_VERCEL_URL
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+      : "http://localhost:3000";
+
   useEffect(() => {
     setLoading(true);
     setError("");
-    fetch("/api/orders")
+    fetch(`${baseUrl}/api/orders`)
       .then(async (res) => {
         if (!res.ok) throw new Error("Failed to fetch orders");
         return res.json();
@@ -18,7 +24,7 @@ export default function OrdersPage() {
       .then(setOrders)
       .catch(() => setError("Unable to load orders. Please try again."))
       .finally(() => setLoading(false));
-  }, []);
+  }, [baseUrl]);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -26,7 +32,9 @@ export default function OrdersPage() {
         Orders
       </h1>
 
-      {loading && <p className="text-gray-500 text-sm sm:text-base">Loading orders...</p>}
+      {loading && (
+        <p className="text-gray-500 text-sm sm:text-base">Loading orders...</p>
+      )}
       {error && <p className="text-red-600 text-sm sm:text-base">{error}</p>}
 
       {!loading && !error && orders.length === 0 && (

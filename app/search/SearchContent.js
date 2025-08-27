@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useCart } from "@/context/CartContext"; // ✅ make sure you have this
+import { useCart } from "@/context/CartContext";
 import toast from "react-hot-toast";
 
-export default function SearchPage() {
+export default function SearchContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
 
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { addToCart } = useCart(); // ✅ from context
+  const { addToCart } = useCart();
 
   useEffect(() => {
     if (query) {
@@ -80,7 +80,7 @@ export default function SearchPage() {
               <button
                 onClick={() => {
                   addToCart(p);
-                  toast.success('item added to cart successfully!')
+                  toast.success("item added to cart successfully!");
                 }}
                 className="mt-auto bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg cursor-pointer hover:bg-indigo-700 transition-colors text-sm sm:text-base"
               >

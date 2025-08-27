@@ -4,7 +4,12 @@ import Image from "next/image";
 import SurpriseBoxButton from "@/components/SurpriseBoxButton";
 
 export default async function HomePage() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+  const baseUrl =
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+  const res = await fetch(`${baseUrl}/api/products`, {
     cache: "no-store",
   });
   const products = await res.json();

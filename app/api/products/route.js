@@ -1,8 +1,6 @@
 // app/api/products/route.js
 import { connectDB } from "@/lib/mongodb";
-import Product from "@/models/Product";
 import { cookies } from "next/headers";
-import { isAdminFromCookies } from "@/lib/adminAuth";
 
 export const dynamic = "force-dynamic";
 
@@ -10,13 +8,14 @@ export async function GET(req) {
   try {
     await connectDB();
 
+    // dynamic import so import-time errors are caught below
+    const { default: Product } = await import("@/models/Product");
+
     const { searchParams } = new URL(req.url);
     const q = searchParams.get("q"); // 👈 query string
 
     let products;
-
     if (q) {
-      // Case-insensitive search in title or description
       products = await Product.find({
         $or: [
           { title: { $regex: q, $options: "i" } },
@@ -31,7 +30,7 @@ export async function GET(req) {
   } catch (error) {
     console.error("GET /api/products error:", error);
     return Response.json(
-      { error: error.message || "Server error" },
+      { error: error?.message ?? String(error) },
       { status: 500 }
     );
   }
@@ -40,7 +39,11 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     await connectDB();
+
     const cookieStore = await cookies();
+
+    // dynamic import of admin check (so top-level doesn't break)
+    const { isAdminFromCookies } = await import("@/lib/adminAuth");
     if (!(await isAdminFromCookies(cookieStore)))
       return new Response("Unauthorized", { status: 401 });
 
@@ -54,6 +57,8 @@ export async function POST(req) {
       );
     }
 
+    const { default: Product } = await import("@/models/Product");
+
     const created = await Product.create({
       title,
       price,
@@ -63,9 +68,9 @@ export async function POST(req) {
 
     return Response.json(created, { status: 201 });
   } catch (error) {
-    console.error("POST /api/products error:", error.message, error.stack);
+    console.error("POST /api/products error:", error);
     return Response.json(
-      { error: error.message || "Server error" },
+      { error: error?.message ?? String(error) },
       { status: 500 }
     );
   }

@@ -12,7 +12,11 @@ export default function ProductsPage() {
     const fetchProducts = async () => {
       try {
         const baseUrl =
-          process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+          process.env.NEXT_PUBLIC_SITE_URL ||
+          (process.env.VERCEL_URL
+            ? `https://${process.env.VERCEL_URL}`
+            : "http://localhost:3000");
+
         const res = await fetch(`${baseUrl}/api/products`);
         const data = await res.json();
         setProducts(data);

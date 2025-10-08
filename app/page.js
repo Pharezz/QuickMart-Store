@@ -5,9 +5,10 @@ import SurpriseBoxButton from "@/components/SurpriseBoxButton";
 
 export default async function HomePage() {
   const baseUrl =
-    process.env.VERCEL_URL
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
+      : "http://localhost:3000");
 
   const res = await fetch(`${baseUrl}/api/products`, {
     cache: "no-store",
@@ -36,8 +37,8 @@ export default async function HomePage() {
               Shop Smarter, Live Better
             </h1>
             <p className="text-sm sm:text-base md:text-lg mb-4 sm:mb-6 text-gray-500 drop-shadow-[0_0_1px_black] font-semibold max-w-xl">
-              Your one-stop store for fashion, gadgets and essentials, all delivered
-              to your doorstep.
+              Your one-stop store for fashion, gadgets and essentials, all
+              delivered to your doorstep.
             </p>
             <Link
               href="/products"

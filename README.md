@@ -9,7 +9,7 @@ Repo: https://github.com/Pharezz/QuickMart-Store.git
 
 
 
-Tech
+Tech:
 
 React 
 
@@ -22,7 +22,7 @@ Vercel
 GitHub Actions for CI
 
 
-Features
+Features:
 
 Product listing, search,
 
@@ -33,7 +33,7 @@ User authentication (NextAuth)
 Admin product CRUD (protected routes)
 
 
-Quickstart (3 commands)
+Quickstart (3 commands):
 
 git clone https://github.com/pharezz/QuickMart-Store.git
 
@@ -44,7 +44,7 @@ cp .env.example .env
 npm install && npm run dev
 
 
-Architecture
+Architecture:
 
 Frontend (Next.js) calls backend API routes for products, cart, auth, and orders.
 
@@ -53,22 +53,22 @@ Backend uses Next.js API routes and MongoDB, exposes /api/products, /api/auth, /
 Considered trade-offs: serverless vs traditional server (chose serverless for easier deployment/demo).
 
 
-Tests & CI
+Tests & CI:
 
 npm test runs unit tests for backend and frontend components where applicable.
 
 GitHub Actions workflow runs lint, tests, and builds on every PR.
 
 
-Learnings & notes
+Learnings & notes:
 
 Implemented optimistic UI updates in the cart to improve UX.
 
 
-License
+License:
 
 MIT — see LICENSE file.
 
-Contact
+Contact:
 
 Found a bug? Open an issue or contact oguegbuikechukwu@gmail.com.

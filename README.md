@@ -1,8 +1,9 @@
-Quickmart — Store App
+Quickmart — E-commerce App
 
-One-liner: Full-stack e-commerce demo with product listing, cart, checkout, admin store management: add, delete, update products.
+Full-stack e-commerce demo with product listing, cart, checkout, admin store management: add, delete, update products.
 
 Live demo: https://quick-mart-store.vercel.app
+
 Repo: https://github.com/Pharezz/QuickMart-Store.git
 
 
@@ -33,9 +34,13 @@ Admin product CRUD (protected routes)
 
 
 Quickstart (3 commands)
+
 git clone https://github.com/pharezz/QuickMart-Store.git
+
 cd quickmart-store
+
 cp .env.example .env
+
 npm install && npm run dev
 
 

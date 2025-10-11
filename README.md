@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Quickmart — Store App
 
-## Getting Started
+One-liner: Full-stack e-commerce demo with product listing, cart, checkout, admin store management: add, delete, update products.
 
-First, run the development server:
+Live demo: https://quick-mart-store.vercel.app
+Repo: https://github.com/Pharezz/QuickMart-Store.git
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tech
 
-## Learn More
+React 
 
-To learn more about Next.js, take a look at the following resources:
+Next.js
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+MongoDB (Atlas)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Vercel
 
-## Deploy on Vercel
+GitHub Actions for CI
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Features
+
+Product listing, search,
+
+Cart, checkout
+
+User authentication (NextAuth)
+
+Admin product CRUD (protected routes)
+
+
+Quickstart (3 commands)
+git clone https://github.com/pharezz/QuickMart-Store.git
+cd quickmart-store
+cp .env.example .env
+npm install && npm run dev
+
+
+Architecture
+
+Frontend (Next.js) calls backend API routes for products, cart, auth, and orders.
+
+Backend uses Next.js API routes and MongoDB, exposes /api/products, /api/auth, /api/orders.
+
+Considered trade-offs: serverless vs traditional server (chose serverless for easier deployment/demo).
+
+
+Tests & CI
+
+npm test runs unit tests for backend and frontend components where applicable.
+
+GitHub Actions workflow runs lint, tests, and builds on every PR.
+
+
+Learnings & notes
+
+Implemented optimistic UI updates in the cart to improve UX.
+
+
+License
+
+MIT — see LICENSE file.
+
+Contact
+
+Found a bug? Open an issue or contact oguegbuikechukwu@gmail.com.

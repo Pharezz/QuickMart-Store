@@ -37,9 +37,9 @@ Quickstart (3 commands):
 
 git clone https://github.com/pharezz/QuickMart-Store.git
 
-cd quickmart-store
+cd quickmart
 
-cp .env.example .env
+cp .env.local.example .env.local
 
 npm install && npm run dev
 

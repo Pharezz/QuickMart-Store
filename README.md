@@ -53,13 +53,6 @@ Backend uses Next.js API routes and MongoDB, exposes /api/products, /api/auth, /
 Considered trade-offs: serverless vs traditional server (chose serverless for easier deployment/demo).
 
 
-Tests & CI:
-
-npm test runs unit tests for backend and frontend components where applicable.
-
-GitHub Actions workflow runs lint, tests, and builds on every PR.
-
-
 Learnings & notes:
 
 Implemented optimistic UI updates in the cart to improve UX.
